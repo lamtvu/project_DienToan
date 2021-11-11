@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+
 const LayoutHome = (props) => {
   return (
     <>

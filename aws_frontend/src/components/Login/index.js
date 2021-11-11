@@ -90,8 +90,9 @@ const Login = () => {
         setLoading(false);
         Swal.fire({
           icon: "success",
-          title: "Đăng nhập thành công",
+          title: "Login Successfull",
         });
+        localStorage.setItem("user", JSON.stringify(result.data));
         history.replace("/dashboard");
       })
       .catch((error) => {
@@ -104,7 +105,7 @@ const Login = () => {
   };
   return (
     <>
-      <Box className={classes.loader}>
+      <Box className={classes.loaderBox}>
         <ScaleLoader
           color="#f50057"
           loading={loading}

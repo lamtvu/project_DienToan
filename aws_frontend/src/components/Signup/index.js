@@ -102,7 +102,7 @@ const SignUp = () => {
         setregisterError(null);
         Swal.fire({
           icon: "success",
-          title: "Đăng ký thành công",
+          title: "Register successfull",
         });
         history.replace("/login");
       })
@@ -129,7 +129,7 @@ const SignUp = () => {
       </Box>
       <div className={`${classes.root} ${loading ? classes.loaderRoot : null}`}>
         <div className={classes.loginBox}>
-          <lable className={classes.title}>Đăng ký</lable>
+          <lable className={classes.title}>Register Account</lable>
           <form
             className={classes.form}
             onSubmit={handleSubmit(onSubmit)}
@@ -142,7 +142,7 @@ const SignUp = () => {
               required
               fullWidth
               id="username"
-              label="Tên tài khoản"
+              label="Username"
               name="username"
               autoComplete="username"
               {...register("username", {
@@ -157,7 +157,7 @@ const SignUp = () => {
               required
               fullWidth
               name="password"
-              label="Mật Khẩu"
+              label="Password"
               type="password"
               id="password"
               autoComplete="password"
@@ -197,11 +197,11 @@ const SignUp = () => {
               type="submit"
               onKeyDown={handleEnterKey}
             >
-              Đăng ký
+              Sign up
             </Button>
           </form>
           <Link className={classes.link} to="/login">
-            Đã có tài khoản
+            Already have an account
           </Link>
         </div>
       </div>
