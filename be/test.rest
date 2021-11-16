@@ -131,3 +131,44 @@ POST https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?method=g
         ":yyyy": "100"
     }
 }
+
+//delete
+###
+DELETE https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxhbXR2dTIiLCJjcmVhdGVBdCI6MTYzNTU3ODM3NjU1MCwiaWF0IjoxNjM2NTI5MTAyfQ.gSIBVQUM4mkp6p7d4e1sAz_-BkKV5m2-HJmiNLnaG9g HTTP/1.1
+
+{
+    "TableName":"demo5",
+    "Key":{
+        "_id":"48c164d6-cefe-470a-8feb-bf09cfee08a1"
+    }
+}
+
+//update
+###
+PUT https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxhbXR2dTIiLCJjcmVhdGVBdCI6MTYzNTU3ODM3NjU1MCwiaWF0IjoxNjM2NTI5MTAyfQ.gSIBVQUM4mkp6p7d4e1sAz_-BkKV5m2-HJmiNLnaG9g HTTP/1.1
+
+{
+    "TableName":"demo5",
+    "Key":{
+        "_id":"56bb5e58-7626-4ee2-aa8b-f78688b20626"
+    },
+    "UpdateExpression":"set #name=:name",
+    "ExpressionAttributeNames":{
+        "#name": "name"
+    },
+    "ExpressionAttributeValues":{
+        ":name": "new name"
+    }
+}
+
+//create
+###
+POST https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?method=create&key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxhbXR2dTIiLCJjcmVhdGVBdCI6MTYzNTU3ODM3NjU1MCwiaWF0IjoxNjM2NTI5MTAyfQ.gSIBVQUM4mkp6p7d4e1sAz_-BkKV5m2-HJmiNLnaG9g HTTP/1.1
+
+{
+    "TableName":"demo5",
+    "Item":{
+        "name":"create new",
+        "age": "100"
+    }
+}

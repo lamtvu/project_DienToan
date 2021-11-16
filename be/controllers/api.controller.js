@@ -48,10 +48,10 @@ module.exports = (event, callback, ddb) => {
         }
 
         try {
-            const response = await ddb.query(params).promise();
-            callback(resService.buildResponse(200, { response }));
+            const response = await ddb.put(params).promise();
+            callback(null, resService.buildResponse(200, { response }));
         } catch (err) {
-            callback(resService.buildResponse(400, { err }));
+            callback(null, resService.buildResponse(400, { err }));
         }
     }
 
@@ -105,8 +105,9 @@ module.exports = (event, callback, ddb) => {
             Key,
             UpdateExpression,
             ExpressionAttributeValues,
+            ExpressionAttributeNames,
             ReturnValues,
-        } = JSON.parse(event.data);
+        } = JSON.parse(event.body);
 
         if (!TableName) {
             callback(null, resService.buildResponse(400, { err: 'tablename required' }));
@@ -121,6 +122,7 @@ module.exports = (event, callback, ddb) => {
             },
             UpdateExpression,
             ExpressionAttributeValues,
+            ExpressionAttributeNames,
             ReturnValues
         }
 
