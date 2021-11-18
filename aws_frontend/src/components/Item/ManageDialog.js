@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles, makeStyles } from "@mui/styles";
 import { Dialog } from "@mui/material";
 import {
@@ -65,27 +65,33 @@ const schema = yup.object().shape({
 export const ManageDialog = (props) => {
   const classes = useStyles();
 
-  const { openDialog, setOpenDialog, handleCloseDialog, modal, tableName } =
-    props;
+  const {
+    openDialog,
+    setOpenDialog,
+    handleCloseDialog,
+    modal,
+    tableName,
+    getListItem,
+  } = props;
   const accessToken = localStorage
     ? JSON.parse(localStorage.getItem("user"))
     : "";
-  const [item, setItem] = useState({ ...props.item });
+  const [item, setItem] = useState({ ...props?.item });
   const { register, handleSubmit, errors } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    setItem(props?.item);
+  }, [props.item]);
   const handleChange = (event) => {
-    const name = event.target.name;
     const value = event.target.value;
-    setItem({
-      ...item,
-      [name]: value,
-    });
+    setItem(value);
   };
 
   const onAddSubmit = () => {
-    const itemJson = JSON.parse(item.item);
+    const itemJson = JSON.parse(item);
     axios({
       url: `https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/data`,
       method: "POST",
@@ -98,10 +104,39 @@ export const ManageDialog = (props) => {
       },
     })
       .then((res) => {
+        getListItem();
         setOpenDialog(false);
         Swal.fire({
           icon: "success",
-          title: "Tạo table thành công",
+          title: "Create item successfull !!!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        setOpenDialog(false);
+      });
+  };
+  const onUpdate = () => {
+    const itemJson = JSON.parse(item);
+    axios({
+      url: `https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/data`,
+      method: "PUT",
+      data: {
+        tableName: tableName,
+        item: itemJson,
+      },
+      headers: {
+        Authorization: `Bearer ${accessToken.token}`,
+      },
+    })
+      .then((res) => {
+        getListItem();
+        setOpenDialog(false);
+        Swal.fire({
+          icon: "success",
+          title: "Update successfull !!!",
           timer: 1500,
           showConfirmButton: false,
         });
@@ -136,7 +171,7 @@ export const ManageDialog = (props) => {
                   })}
                   error={!!errors?.item}
                   helperText={errors?.item?.message}
-                  value={item.item}
+                  value={item}
                   onChange={handleChange}
                 />
               </Grid>
@@ -149,7 +184,11 @@ export const ManageDialog = (props) => {
             className={classes.button}
             variant="contained"
             color="secondary"
-            onClick={modal.id === "tao" ? handleSubmit(onAddSubmit) : ""}
+            onClick={
+              modal.id === "tao"
+                ? handleSubmit(onAddSubmit)
+                : handleSubmit(onUpdate)
+            }
           >
             {modal.button}
           </Button>

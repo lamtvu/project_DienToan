@@ -8,21 +8,15 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import TableChartIcon from "@mui/icons-material/TableChart";
 import Box from "@mui/material/Box";
-import {
-  Button,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-} from "@mui/material";
+import { Button, Paper, TableContainer } from "@mui/material";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import { ManageDialog } from "./ManageDialog";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
-import prettyFormat from "pretty-format";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles({
   root: {
@@ -48,8 +42,22 @@ const useStyles = makeStyles({
   loaderRoot: {
     opacity: 0.5,
   },
+  items: {
+    display: "flex",
+    justifyContent: "space-between",
+
+    "&:hover $btnGroup": {
+      visibility: "visible",
+      opacity: 1,
+    },
+  },
+  btnGroup: {
+    visibility: "hidden",
+    opacity: 0,
+    transition: "all 0.3s",
+  },
 });
-export default function Item() {
+export default function Item(props) {
   const [checked, setChecked] = useState([0]);
   const accessToken = localStorage
     ? JSON.parse(localStorage.getItem("user"))
@@ -84,7 +92,8 @@ export default function Item() {
   };
   useEffect(() => {
     getListItem();
-  }, [tableName]);
+  }, [tableName, item]);
+
   const [modal, setModal] = useState({
     title: "",
     button: "",
@@ -96,7 +105,16 @@ export default function Item() {
       button: "Create",
       id: "tao",
     });
-    setItem({});
+    setItem(null);
+    setOpenDialog(true);
+  };
+  const handleUpdate = (item) => {
+    setModal({
+      title: "Update Item",
+      button: "Update",
+      id: "update",
+    });
+    setItem(JSON.stringify(item, null, 2));
     setOpenDialog(true);
   };
   const handleCloseDialog = () => {
@@ -116,7 +134,33 @@ export default function Item() {
     setChecked(newChecked);
     setTableName(tableName);
   };
-
+  const onDelete = (id) => {
+    axios({
+      url: `https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/data`,
+      method: "DELETE",
+      data: {
+        tableName: tableName,
+        _id: id,
+      },
+      headers: {
+        Authorization: `Bearer ${accessToken.token}`,
+      },
+    })
+      .then((res) => {
+        setOpenDialog(false);
+        getListItem();
+        Swal.fire({
+          icon: "success",
+          title: "Delete successfull !!!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        setOpenDialog(false);
+      });
+  };
   return (
     <>
       <Box className={classes.loaderBox}>
@@ -136,6 +180,7 @@ export default function Item() {
         modal={modal}
         tableName={tableName}
         item={item}
+        getListItem={getListItem}
       />
       <Box className={`${classes.root} ${loading ? classes.loaderRoot : null}`}>
         <List
@@ -189,8 +234,16 @@ export default function Item() {
           {listItem &&
             listItem.map((item, index) => {
               return (
-                <div key={index}>
+                <div className={classes.items} key={index}>
                   <pre>{JSON.stringify(item, null, 2)}</pre>
+                  <div className={classes.btnGroup}>
+                    <IconButton onClick={() => handleUpdate(item)}>
+                      <EditIcon fontSize="large" />
+                    </IconButton>
+                    <IconButton onClick={() => onDelete(item._id)}>
+                      <DeleteIcon fontSize="large" />
+                    </IconButton>
+                  </div>
                 </div>
               );
             })}

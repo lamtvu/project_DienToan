@@ -19,7 +19,7 @@ POST https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/users HTTP/1
 //get infor User
 GET https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/users HTTP/1.1
 Content-Type: application/json
-Authorization:Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6ImJlNWJmNWUyNzNlNTk3MGY1MTdlMmFkN2NlOTQ5M2VlYmQyYTBlNjYzZWRjNzVkOWQ3NTViMWE5MDQ1YjNjMmMiLCJ1c2VybmFtZSI6ImxhbXR2dSIsImVtYWlsIjoibGFtdHZ1MTkwQGdtYWlsLmNvbSIsImNyZWF0ZUF0IjoxNjM1NDI3MTQ4MDk1LCJpYXQiOjE2MzU1Nzg0MjksImV4cCI6MTYzNTY2NDgyOX0.qwiWrDfZ2FZ9yPh_e1-SYRrTvm1QTe0bbGj95xdo-Ro
+Authorization:Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6Ijk2Y2FlMzVjZThhOWIwMjQ0MTc4YmYyOGU0OTY2YzJjZTFiODM4NTcyM2E5NmE2YjgzODg1OGNkZDZjYTBhMWUiLCJyb2xlIjoxLCJjcmVhdGVBdCI6MTYzNTU3ODM3NjU1MCwidXNlcm5hbWUiOiJsYW10dnUyIiwiZW1haWwiOiJsYW10dnUxOTAzQGdtYWlsLmNvbSIsImtleSI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUoxYzJWeWJtRnRaU0k2SW14aGJYUjJkVElpTENKamNtVmhkR1ZCZENJNk1UWXpOVFUzT0RNM05qVTFNQ3dpYVdGMElqb3hOak0yTlRNeE1EQXdmUS5kY3I3Z19mNzVaYVBlc25kVnNnZThzWFFIelVSV1Z6dGNkTG93NW50aHBNIiwiaWF0IjoxNjM3MDQ3ODA1LCJleHAiOjE2MzcxMzQyMDV9.1_WatkPl_XArnbZyAv8QbfrIC42BXPDvCcoLND1wZsQ
 
 ###
 //change password
@@ -163,10 +163,10 @@ PUT https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?key=eyJhb
 
 //create
 ###
-POST https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?method=create&key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxhbXR2dTIiLCJjcmVhdGVBdCI6MTYzNTU3ODM3NjU1MCwiaWF0IjoxNjM2NTI5MTAyfQ.gSIBVQUM4mkp6p7d4e1sAz_-BkKV5m2-HJmiNLnaG9g HTTP/1.1
+POST https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?method=create&key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxobmFtMTIwMSIsImNyZWF0ZUF0IjoxNjM2MDE0NTM2MDcwLCJpYXQiOjE2MzcwNDk3MzN9.p-P6aO4XQuQku3T6tsWmJFgKsKjj3NaufuykRasNCdk HTTP/1.1
 
 {
-    "TableName":"demo5",
+    "TableName":"room",
     "Item":{
         "name":"create new",
         "age": "100"

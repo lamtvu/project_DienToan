@@ -17,6 +17,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 import TableChartIcon from "@mui/icons-material/TableChart";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
 
 const useStyles = makeStyles((theme) => ({
   desktopDrawer: {
@@ -68,6 +69,11 @@ const SideBar = () => {
       href: "/item",
       icon: ViewListIcon,
       title: "Item",
+    },
+    {
+      href: "/key",
+      icon: VpnKeyIcon,
+      title: "Key",
     },
     {
       href: "/document",

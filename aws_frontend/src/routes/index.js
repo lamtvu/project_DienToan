@@ -1,6 +1,7 @@
 import DashBoard from "../components/Dashboard";
 import Document from "../components/Document";
 import Item from "../components/Item";
+import Keys from "../components/Keys";
 import Login from "../components/Login";
 import SignUp from "../components/Signup";
 import Tables from "../components/Tables";
@@ -16,4 +17,5 @@ export const routeDashboard = [
   { exact: false, path: "/tables", component: Tables },
   { exact: false, path: "/item", component: Item },
   { exact: false, path: "/document", component: Document },
+  { exact: false, path: "/key", component: Keys },
 ];
