@@ -77,7 +77,11 @@ export const ManageDialog = (props) => {
     ? JSON.parse(localStorage.getItem("user"))
     : "";
   const [item, setItem] = useState({ ...props?.item });
-  const { register, handleSubmit, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });

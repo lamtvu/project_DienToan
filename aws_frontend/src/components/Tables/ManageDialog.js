@@ -63,17 +63,22 @@ const MuiDialogActions = withStyles((theme) => ({
 }))(DialogActions);
 
 const schema = yup.object().shape({
-  tableName: yup.string().required("Vui lòng nhập tên!!"),
+  tableName: yup.string().required("Vui lòng nhập tên table!!"),
 });
 export const ManageDialog = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { openDialog, setOpenDialog, handleCloseDialog, modal } = props;
+  const [tableError, setTableError] = useState(null);
   const accessToken = localStorage
     ? JSON.parse(localStorage.getItem("user"))
     : "";
   const [tableItem, setTableItem] = useState({ ...props.tableItem });
-  const { register, handleSubmit, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
@@ -108,6 +113,7 @@ export const ManageDialog = (props) => {
       })
       .catch((error) => {
         console.log(error);
+        setTableError(error.response.data.err);
         setOpenDialog(false);
       });
   };
@@ -142,6 +148,7 @@ export const ManageDialog = (props) => {
             </Grid>
           </form>
         </MuiDialogContent>
+        {tableError ? <h5 style={{ color: "red" }}>{tableError}</h5> : ""}
         <MuiDialogActions>
           <Button
             type="submit"

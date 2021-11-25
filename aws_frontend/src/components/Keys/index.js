@@ -105,7 +105,9 @@ const Keys = () => {
             <TableCell variant="head" style={{ fontWeight: "bold" }}>
               Key
             </TableCell>
-            <TableCell>{userInfo?.key}</TableCell>
+            <TableCell style={{ wordBreak: "break-word", width: "100%" }}>
+              {userInfo?.key}
+            </TableCell>
           </TableRow>
         </Table>
       </Box>

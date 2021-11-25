@@ -73,7 +73,12 @@ const Login = () => {
   const classes = useStyles();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, errors } = useForm({
+  const [errorLogin, setErrorLogin] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
@@ -97,6 +102,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
+        setErrorLogin(error?.response?.data?.err);
         setLoading(false);
       });
   };
@@ -155,6 +161,7 @@ const Login = () => {
               error={!!errors?.password}
               helperText={errors?.password?.message}
             />
+            {errorLogin ? <h5 style={{ color: "red" }}>{errorLogin}</h5> : ""}
             <FormControlLabel
               className={classes.remember}
               control={<Checkbox value="remember" color="success" />}

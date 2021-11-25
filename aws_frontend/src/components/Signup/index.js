@@ -82,7 +82,11 @@ const schema = yup.object().shape({
 const SignUp = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { register, handleSubmit, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
@@ -109,7 +113,7 @@ const SignUp = () => {
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        setregisterError(error);
+        setregisterError(error.response.data.err);
       });
   };
   const handleEnterKey = (e) => {
@@ -146,7 +150,7 @@ const SignUp = () => {
               name="username"
               autoComplete="username"
               {...register("username", {
-                required: "Required",
+                required: true,
               })}
               error={!!errors?.username}
               helperText={errors?.username?.message}
@@ -162,7 +166,7 @@ const SignUp = () => {
               id="password"
               autoComplete="password"
               {...register("password", {
-                required: "Required",
+                required: true,
               })}
               error={!!errors?.password}
               helperText={errors?.password?.message}
@@ -184,12 +188,16 @@ const SignUp = () => {
               id="email"
               autoComplete="email"
               {...register("email", {
-                required: "Required",
+                required: true,
               })}
               error={!!errors?.email}
               helperText={errors?.email?.message}
             />
-
+            {registerError ? (
+              <h5 style={{ color: "red" }}>{registerError}</h5>
+            ) : (
+              ""
+            )}
             <Button
               className={classes.submit}
               variant="contained"

@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import TableChartIcon from "@mui/icons-material/TableChart";
 import Box from "@mui/material/Box";
 import { Button, Paper, TableContainer } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import { ManageDialog } from "./ManageDialog";
 import axios from "axios";
@@ -17,6 +17,7 @@ import { ScaleLoader } from "react-spinners";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Swal from "sweetalert2";
+import { actGetTable } from "../Tables/modules/action";
 
 const useStyles = makeStyles({
   root: {
@@ -58,11 +59,12 @@ const useStyles = makeStyles({
   },
 });
 export default function Item(props) {
-  const [checked, setChecked] = useState([0]);
+  const [checked, setChecked] = useState(null);
   const accessToken = localStorage
     ? JSON.parse(localStorage.getItem("user"))
     : "";
   const classes = useStyles();
+  const dispatch = useDispatch();
   const listTables = useSelector(
     (state) => state.listTableReducer?.data?.data?.result
   );
@@ -87,9 +89,13 @@ export default function Item(props) {
         setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err);
       });
   };
+  useEffect(() => {
+    dispatch(actGetTable());
+  }, []);
   useEffect(() => {
     getListItem();
   }, [tableName, item]);
@@ -122,44 +128,55 @@ export default function Item(props) {
   };
 
   const handleToggle = (value, tableName) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [checked];
+    // const currentIndex = checked.indexOf(value);
+    // const newChecked = [checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+    // if (currentIndex === -1) {
+    //   newChecked.push(value);
+    // } else {
+    //   newChecked.splice(currentIndex, 1);
+    // }
 
-    setChecked(newChecked);
+    // setChecked(newChecked);
     setTableName(tableName);
   };
   const onDelete = (id) => {
-    axios({
-      url: `https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/data`,
-      method: "DELETE",
-      data: {
-        tableName: tableName,
-        _id: id,
-      },
-      headers: {
-        Authorization: `Bearer ${accessToken.token}`,
-      },
-    })
-      .then((res) => {
-        setOpenDialog(false);
-        getListItem();
-        Swal.fire({
-          icon: "success",
-          title: "Delete successfull !!!",
-          timer: 1500,
-          showConfirmButton: false,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        setOpenDialog(false);
-      });
+    Swal.fire({
+      icon: "question",
+      title: "Delete item",
+      text: "Do you really want to delete this item ?",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+    }).then((swalRes) => {
+      if (swalRes.isConfirmed) {
+        axios({
+          url: `https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/data`,
+          method: "DELETE",
+          data: {
+            tableName: tableName,
+            _id: id,
+          },
+          headers: {
+            Authorization: `Bearer ${accessToken.token}`,
+          },
+        })
+          .then((res) => {
+            setOpenDialog(false);
+            getListItem();
+            Swal.fire({
+              icon: "success",
+              title: "Delete successfull !!!",
+              timer: 1500,
+              showConfirmButton: false,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            setOpenDialog(false);
+          });
+      }
+    });
   };
   return (
     <>
@@ -211,7 +228,7 @@ export default function Item(props) {
                   <ListItemIcon>
                     <Checkbox
                       edge="start"
-                      checked={checked.indexOf(index) !== -1}
+                      checked={value?.name === tableName}
                       tabIndex={-1}
                       disableRipple
                       inputProps={{ "aria-labelledby": labelId }}
