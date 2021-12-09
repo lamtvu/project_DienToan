@@ -43,8 +43,7 @@ trước tiên clone source code từ github
 - Tương tự các thao tác tạo resouce, method cho các resouce và method khác sao cho giống với cấu trúc resouce sau
 
 ---
-
-/
+    /
     /api
         DELETE
         OPTIONS
@@ -85,28 +84,25 @@ trước tiên clone source code từ github
 - nhất tổ hợp phím **Ctrl** + **Shift** + **f**, để replace tất cả base url cũ **https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe** thành url bạn tạo được ở **API gateway**.
 - Sự dụng câu lệnh dười để cài đặt các thư viện
 ---
-npm install
----
+    npm install
 - Sư dụng câu lệnh dưới để chạy local của frontend
 ---
-npm start
----
+    npm start
 
 - Build docker bằng câu lệnh (username là tên người dùng trên docker hub)
 ---
-docker build -t <username>/<imagename> .
----
+    docker build -t <username>/<imagename> .
+
 - Deploy lên docker hub bằng câu lệnh (với username và imagname là username và imagename khi build)
 ---
-docker push <username>/<imagename>
----
+    docker push <username>/<imagename>
+
 - mở Ec2 truy cập vào instace, pull image vừ push lên từ trên docker hub bằng câu lênh
 ---
-docker pull <username>/<imagename>
----
+    docker pull <username>/<imagename>
+
 - Run image ở port 3000 bằng câu lệnh
 ---
-docker run -it -p 3000:3000 <username>/<imagename>
----
+    docker run -it -p 3000:3000 <username>/<imagename>
 - truy cập Ec2, chọn instace được sử dụng ở trên chọn **Security** -> **Security groups** -> **Edit inbound rules**, thêm rule với **port range** là **3000** cho phép mọi địa chỉ truy cập 0.0.0.0/0
 
