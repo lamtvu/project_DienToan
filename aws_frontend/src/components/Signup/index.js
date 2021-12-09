@@ -78,6 +78,10 @@ const schema = yup.object().shape({
     .string()
     .required("Email đang trống !")
     .email("Email không đúng định dạng"),
+  confirmPassword: yup
+    .string()
+    .required("Mật khẩu xác nhận đang trống !")
+    .oneOf([yup.ref('password'), null], 'Mật khẩu xác nhận phải giống mật khẩu')
 });
 const SignUp = () => {
   const classes = useStyles();
@@ -174,9 +178,15 @@ const SignUp = () => {
             <TextField
               variant="outlined"
               margin="dense"
+              name="confirmPassword"
               label="Confirm password"
+              {...register("confirmPassword", {
+                required: true,
+              })}
               type="password"
               fullWidth
+              error={!!errors?.confirmPassword}
+              helperText={errors?.confirmPassword?.message}
             />
             <TextField
               variant="outlined"

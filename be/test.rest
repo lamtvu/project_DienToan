@@ -116,25 +116,15 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6Ijk2Y2
 //-------------------------------------------------api----------------------------------------------------
 //get data
 ###
-POST https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?method=get&key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxhbXR2dTIiLCJjcmVhdGVBdCI6MTYzNTU3ODM3NjU1MCwiaWF0IjoxNjM3MjMzMTk4fQ.yCgqHxjH7hjMqQFWt-cta1fSxvkvzLLOYXWWa73Kdnc
+POST https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?method=get&key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxhbXR2dTEyMyIsImNyZWF0ZUF0IjoxNjM4NDM5Mzg3NDU4LCJpYXQiOjE2Mzg0Mzk0ODJ9.xzfHGHU34iOD9Je8zbAFs8XmOWFV93NjwBuo2w4kNG4
 
 {
-    "TableName":"demo5",
-    "ProjectionExpression":"#id,#name",
-    "FilterExpression":"#age = :yyyy",
-    "ExpressionAttributeNames":{
-        "#id":"_id",
-        "#name":"name",
-        "#age":"age"
-    },
-    "ExpressionAttributeValues":{
-        ":yyyy": "100"
-    }
+    "TableName":"aaaa"
 }
 
 //delete
 ###
-DELETE https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxhbXR2dTIiLCJjcmVhdGVBdCI6MTYzNTU3ODM3NjU1MCwiaWF0IjoxNjM3MjMzMTk4fQ.yCgqHxjH7hjMqQFWt-cta1fSxvkvzLLOYXWWa73Kdnc
+DELETE https://k9ilwv1dvj.execute-api.us-east-1.amazonaws.com/cloudbe/api?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxhbXR2dTEyMyIsImNyZWF0ZUF0IjoxNjM4NDM5Mzg3NDU4LCJpYXQiOjE2Mzg0Mzk0ODJ9.xzfHGHU34iOD9Je8zbAFs8XmOWFV93NjwBuo2w4kNG4
 
 {
     "TableName":"demo5",
