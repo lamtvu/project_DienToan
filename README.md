@@ -14,9 +14,9 @@ trước tiên clone source code từ github
 
 - Truy cập vào **console.aws.amazon.com**, tiếp tục truy cập vào **DynamoDB**.
 - Trong **Tables** chọn **Create table**, tableName là **users**, Partition key là **username**, Sort key **createAt**.
-- Lặp lại thao tác tương tự để tạo các bảng: __
-  **data**: Partition key là **tableName**, Sort Key là **_id**__
-  **tables**: Partition key là **owner**, Sort Key là **name**__
+- Lặp lại thao tác tương tự để tạo các bảng: \
+  **data**: Partition key là **tableName**, Sort Key là **_id** \
+  **tables**: Partition key là **owner**, Sort Key là **name** \
 
 ### BackEnd
 
@@ -30,9 +30,9 @@ trước tiên clone source code từ github
 - Truy cập vào **console.aws.amazon.com**, tiếp tục truy cập vào **aws lambda** service.
 - Chọn **create funtion** với fuction name là **cloudProject** (có thể đổi lại), trong tùy chọn **excution role** chọn **Create a new role with basic Lambda permissions**.
 - Sau khi tạo function thành công, truy cập vào fuction chọn **code** -> **Upload form** -> .zip file và upload file zip được nén ở trên vào.
-- Chọn **Configuration** -> **Environment variables** sau đó thêm các Key với value là: __
-Key: SECRET_KEY, Value: 00bf9e8c831ed863e2959e598f0ee008b9a414550f7bc9c200a7c7f9e2887e3f84007ae8faec01372bda0a70ef1ed2e929f8139590b48d0ee21ed904287942f9 (hoặc 1 chuỗi ngẫu nhiên base 64 khác)__
-KeyTOKEN_LIFE, Value: 1d (cho thời gian sống của phiên đăng nhập là 1 ngày)
+- Chọn **Configuration** -> **Environment variables** sau đó thêm các Key với value là:\
+Key: SECRET_KEY, Value: 1 chuỗi ngẫu nhiên base 64 khác \
+KeyTOKEN_LIFE, Value: 1d (cho thời gian sống của phiên đăng nhập là 1 ngày) \
 
 #### API gateway
 
