@@ -16,7 +16,7 @@ trước tiên clone source code từ github
 - Trong **Tables** chọn **Create table**, tableName là **users**, Partition key là **username**, Sort key **createAt**.
 - Lặp lại thao tác tương tự để tạo các bảng: \
   **data**: Partition key là **tableName**, Sort Key là **_id** \
-  **tables**: Partition key là **owner**, Sort Key là **name** \
+  **tables**: Partition key là **owner**, Sort Key là **name** 
 
 ### BackEnd
 
@@ -31,8 +31,8 @@ trước tiên clone source code từ github
 - Chọn **create funtion** với fuction name là **cloudProject** (có thể đổi lại), trong tùy chọn **excution role** chọn **Create a new role with basic Lambda permissions**.
 - Sau khi tạo function thành công, truy cập vào fuction chọn **code** -> **Upload form** -> .zip file và upload file zip được nén ở trên vào.
 - Chọn **Configuration** -> **Environment variables** sau đó thêm các Key với value là:\
-Key: SECRET_KEY, Value: 1 chuỗi ngẫu nhiên base 64 khác \
-KeyTOKEN_LIFE, Value: 1d (cho thời gian sống của phiên đăng nhập là 1 ngày) \
+Key: SECRET_KEY, Value: 1 chuỗi base64 ngẫu nhiên
+KeyTOKEN_LIFE, Value: 1d (cho thời gian sống của phiên đăng nhập là 1 ngày) 
 
 #### API gateway
 
