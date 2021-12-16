@@ -28,7 +28,7 @@ trước tiên clone source code từ github
 ---
 - Nén các file trong thư mục be thành file zip.
 - Truy cập vào **console.aws.amazon.com**, tiếp tục truy cập vào **aws lambda** service.
-- Chọn **create funtion** với fuction name là **cloudProject** (có thể đổi lại), trong tùy chọn **excution role** chọn **Create a new role with basic Lambda permissions**.
+- Chọn **create funtion** với fuction name là **cloudProject** (có thể đổi lại), trong tùy chọn **excution role** tạo role với các quyển **AmazonDynamoDBFullAccess**, **AmazonAPIGatewayAdministrator**.
 - Sau khi tạo function thành công, truy cập vào fuction chọn **code** -> **Upload form** -> .zip file và upload file zip được nén ở trên vào.
 - Chọn **Configuration** -> **Environment variables** sau đó thêm các Key với value là:\
 Key: SECRET_KEY, Value: 1 chuỗi base64 ngẫu nhiên
